@@ -1,9 +1,9 @@
 [project]
 name = "lamber-report"
 dynamic = ["version"]
-description = "Serve lamber report."
+description = "Test report based on Lamber project."
 readme = "README.md"
-authors = [{ name = "yaomeng", email = "luizyao@163.com" }]
+authors = [{ name = "luizyao", email = "luizyao@163.com" }]
 requires-python = ">=3.10"
 dependencies = []
 
@@ -16,7 +16,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["lamber_report"]
+artifacts = ["lamber_report/frontend/*"]
 
 [tool.hatch.version]
 path = "lamber_report/__init__.py"
-
