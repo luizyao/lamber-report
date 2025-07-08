@@ -330,12 +330,64 @@ def main() -> None:
                 )
                 return self.wfile.write(json.dumps(cursor.fetchone()).encode("utf-8"))
 
+            elif self.path.startswith("/api/testcase/attachments"):
+                self._set_json_headers()
+                query_params = parse_qs(urlparse(self.path).query)
+                testcase_id = query_params.get("testcase_id", [""])[0]
+
+                cursor.execute(
+                    """
+                    SELECT
+                        uuid,
+                        name,
+                        json (content_type) as content_type,
+                        create_time
+                    FROM
+                        lamber_attachment
+                    WHERE
+                        testcase_uuid = ?
+                    ORDER BY
+                        create_time DESC;
+                    """,
+                    (testcase_id,),
+                )
+
+                return self.wfile.write(json.dumps(cursor.fetchall()).encode("utf-8"))
+
             else:
                 parsed_url = urlparse(self.path)
                 if parsed_url.path in ("/project", "/test_session", "/testcase"):
                     self.path = parsed_url._replace(
                         path=parsed_url.path + ".html"
                     ).geturl()
+
+                elif parsed_url.path.startswith("/attachments"):
+                    attachments_path = (
+                        Path(__file__).parent.resolve() / "frontend" / "attachments"
+                    )
+                    attachments_path.mkdir(parents=True, exist_ok=True)
+                    target_file_name = parsed_url.path.split("/")[-1]
+                    target_file_path = attachments_path / target_file_name
+                    if not target_file_path.is_file():
+                        uuid = target_file_name.split(".")[0]
+                        cursor.execute(
+                            """
+                            SELECT
+                                content_value
+                            FROM
+                                lamber_attachment
+                            WHERE
+                                uuid = ?;
+                            """,
+                            (uuid,),
+                        )
+                        data = cursor.fetchone()
+                        if data:
+                            content_value = data["content_value"]
+                            with target_file_path.open(
+                                isinstance(content_value, bytes) and "wb" or "w"
+                            ) as file:
+                                file.write(content_value)
 
                 return super().do_GET()
 

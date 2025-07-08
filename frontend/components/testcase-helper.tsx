@@ -2,6 +2,7 @@ import { Empty, Tabs } from "antd";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { useTestcasePytestLogs } from "@/lib/data-provider";
 import TestcaseHelperHistories from "./testcase-helper-histories";
+import TestcaseHelperAttachments from "./testcase-helper-attachments";
 
 export default function TestcaseHelper({
   testcaseId,
@@ -57,6 +58,11 @@ export default function TestcaseHelper({
         },
         {
           key: "4",
+          label: "Attachments",
+          children: <TestcaseHelperAttachments testcaseId={testcaseId} />,
+        },
+        {
+          key: "5",
           label: "Histories",
           children: (
             <TestcaseHelperHistories
