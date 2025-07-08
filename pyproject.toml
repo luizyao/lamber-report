@@ -16,7 +16,10 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["lamber_report"]
-artifacts = ["lamber_report/frontend/*"]
+artifacts = [
+    "lamber_report/frontend/*",
+    "!lamber_report/frontend/attachments/*",
+]
 
 [tool.hatch.version]
 path = "lamber_report/__init__.py"

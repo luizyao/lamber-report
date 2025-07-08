@@ -30,7 +30,7 @@ export type TestSession = {
 export function useTestSessions(projectId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/project/test_sessions?project_id=${projectId}`,
-    fetcher,
+    fetcher
   );
 
   return {
@@ -47,7 +47,7 @@ type TestSessionEnvironment = {
 export function useTestSessionEnvironment(testSessionId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/test_session/environment?test_session_id=${testSessionId}`,
-    fetcher,
+    fetcher
   );
 
   return {
@@ -72,7 +72,7 @@ type TestSessionResultStatistic = {
 export function useTestSessionResultStatistic(testSessionId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/test_session/result_statistic?test_session_id=${testSessionId}`,
-    fetcher,
+    fetcher
   );
 
   return {
@@ -95,7 +95,7 @@ export type TestSessionTestcase = {
 export function useTestSessionTestcases(testSessionId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/test_session/testcases?test_session_id=${testSessionId}`,
-    fetcher,
+    fetcher
   );
 
   return {
@@ -118,7 +118,7 @@ type TestcaseLanding = {
 export function useTestcaseLanding(testcaseId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/testcase/landing?testcase_id=${testcaseId}`,
-    fetcher,
+    fetcher
   );
 
   return {
@@ -148,7 +148,7 @@ type TestcaseExplorer = {
 export function useTestcaseExplorer(testcaseId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/testcase/explorer?testcase_id=${testcaseId}`,
-    fetcher,
+    fetcher
   );
 
   return {
@@ -166,7 +166,7 @@ type TestresultSourcecode = {
 export function useTestcaseSourcecode(testcaseId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/testcase/sourcecode?testcase_id=${testcaseId}`,
-    fetcher,
+    fetcher
   );
 
   return {
@@ -179,7 +179,7 @@ export function useTestcaseSourcecode(testcaseId: string) {
 export function useTestcaseHistories(testcaseId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/testcase/histories?testcase_id=${testcaseId}`,
-    fetcher,
+    fetcher
   );
 
   return {
@@ -198,11 +198,31 @@ type TestcasePytestLogs = {
 export function useTestcasePytestLogs(testcaseId: string) {
   const { data, error, isLoading } = useSWR(
     `/api/testcase/pytest_logs?testcase_id=${testcaseId}`,
-    fetcher,
+    fetcher
   );
 
   return {
     testcasePytestLogs: data as TestcasePytestLogs,
+    isLoading,
+    isError: error,
+  };
+}
+
+type testcaseAttachment = {
+  uuid: string;
+  name: string;
+  content_type: string;
+  create_time: number;
+};
+
+export function useTestcaseAttachments(testcaseId: string) {
+  const { data, error, isLoading } = useSWR(
+    `/api/testcase/attachments?testcase_id=${testcaseId}`,
+    fetcher
+  );
+
+  return {
+    testcaseAttachments: data as testcaseAttachment[],
     isLoading,
     isError: error,
   };
