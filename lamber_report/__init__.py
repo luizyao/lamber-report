@@ -6,7 +6,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 def main() -> None:
