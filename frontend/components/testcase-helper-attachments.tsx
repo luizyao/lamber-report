@@ -19,11 +19,11 @@ export default function TestcaseHelperAttachments({
           <List.Item.Meta
             title={
               <>
-                <Typography.Text>
-                  [
+                [
+                <Typography.Text mark>
                   {(JSON.parse(item.content_type) as string[])[1].toUpperCase()}
-                  ]
-                </Typography.Text>{" "}
+                </Typography.Text>
+                ]{" "}
                 <a
                   href={`attachments/${item.uuid}.${
                     (JSON.parse(item.content_type) as string[])[1]

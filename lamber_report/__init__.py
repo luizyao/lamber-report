@@ -347,7 +347,7 @@ def main() -> None:
                     WHERE
                         testcase_uuid = ?
                     ORDER BY
-                        create_time DESC;
+                        create_time;
                     """,
                     (testcase_id,),
                 )
