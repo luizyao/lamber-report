@@ -1,17 +1,15 @@
 # Lamber-Report
-基于 [Lamber](https://github.com/luizyao/lamber) 的测试报告。
+A test report based on [Lamber](https://github.com/luizyao/lamber) project。
 
-# 安装
+## Installation
 ```bash
 pip install lamber-report
 ```
 
-## 依赖
+### Dependencies
 * python >= 3.10
 
-# Quickstart
-命令行工具：
-
+## Quickstart
 ```bash
 lamber_report <sqlite db file path>
 ```

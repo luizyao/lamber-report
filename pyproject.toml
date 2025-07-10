@@ -1,7 +1,7 @@
 [project]
 name = "lamber-report"
 dynamic = ["version"]
-description = "Test report based on Lamber project."
+description = "A test report based on Lamber project."
 readme = "README.md"
 authors = [{ name = "luizyao", email = "luizyao@163.com" }]
 requires-python = ">=3.10"
